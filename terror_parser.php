@@ -103,7 +103,7 @@ foreach($html_ul->find('li') as $li) {
         'name_second'        => trimmer(@$item['name_second']),
         'surname_second'     => trimmer(@$item['surname_second']),
         'patronymic_second'  => trimmer(@$item['patronymic_second']),
-        'ID'                 => preg_replace('/\./', '', @$item['id'])
+        'ID'                 => preg_replace('/(\.)/', '', @$item['id'])
         ],
     ];
 
