@@ -98,7 +98,7 @@ foreach($html_ul->find('li') as $li) {
         'name'               => trimmer(@$item['name']), 
         'surname'            => trimmer(@$item['surname']),
         'patronymic'         => trimmer(@$item['patronymic']),
-        'date_of_birth'      => trimmer(@$item['date_of_birth']),
+        'date_of_birth'      => date("Y-m-d", strtotime(@$item['date_of_birth'])), // 31.12.2000 => 2000.12.31 (for MYSQL)
         'place_of_birth'     => trimmer(@$item['place_of_birth']),
         'name_second'        => trimmer(@$item['name_second']),
         'surname_second'     => trimmer(@$item['surname_second']),
