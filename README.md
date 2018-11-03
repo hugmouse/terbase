@@ -11,7 +11,7 @@
 $ apt-get update
 $ apt-get install php php-mysql
 
-$ git clone https://github.com/hugmouse/RTBPA.git
+$ git clone https://github.com/hugmouse/terbase.git
 $ cd RTBPA/
 $ php terror_parser.php
 ```
@@ -28,7 +28,7 @@ $ add-apt-repository https://dl.hhvm.com/debian
 $ apt-get update
 $ apt-get install hhvm
 
-$ git clone https://github.com/hugmouse/RTBPA.git
+$ git clone https://github.com/hugmouse/terbase.git
 $ cd RTBPA/
 $ hhvm terror_parser.php
 ```
@@ -43,7 +43,7 @@ $ add-apt-repository https://dl.hhvm.com/ubuntu
 $ apt-get update
 $ apt-get install hhvm
 
-$ git clone https://github.com/hugmouse/RTBPA.git
+$ git clone https://github.com/hugmouse/terbase.git
 $ cd RTBPA/
 $ hhvm terror_parser.php
 ```
