@@ -12,7 +12,7 @@ $ apt-get update
 $ apt-get install php php-mysql
 
 $ git clone https://github.com/hugmouse/terbase.git
-$ cd RTBPA/
+$ cd terbase/
 $ php terror_parser.php
 ```
 
@@ -29,7 +29,7 @@ $ apt-get update
 $ apt-get install hhvm
 
 $ git clone https://github.com/hugmouse/terbase.git
-$ cd RTBPA/
+$ cd terbase/
 $ hhvm terror_parser.php
 ```
 
@@ -44,7 +44,7 @@ $ apt-get update
 $ apt-get install hhvm
 
 $ git clone https://github.com/hugmouse/terbase.git
-$ cd RTBPA/
+$ cd terbase/
 $ hhvm terror_parser.php
 ```
 ##### Дополнительную информацию вы можете найти [на официальном сайте HHVM](https://docs.hhvm.com/hhvm/installation/linux)
