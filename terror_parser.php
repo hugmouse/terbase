@@ -91,32 +91,27 @@ foreach($html_ul->find('li') as $li) {
         unset($item['date_of_birth']);
     }
 
-    //Для логов
-    $all[] = $item;
-
-
     // Для удобства
     $list = 
     [
         [
-        'name'               => @$item['name'], 
+        'name'               => trimmer(@$item['name']), 
         'surname'            => trimmer(@$item['surname']),
         'patronymic'         => trimmer(@$item['patronymic']),
         'date_of_birth'      => trimmer(@$item['date_of_birth']),
         'place_of_birth'     => trimmer(@$item['place_of_birth']),
-        'name_second'        => @$item['name_second'],
-        'surname_second'     => @$item['surname_second'],
+        'name_second'        => trimmer(@$item['name_second']),
+        'surname_second'     => trimmer(@$item['surname_second']),
         'patronymic_second'  => trimmer(@$item['patronymic_second']),
-        'ID'                 => trimmer(@$item['ID'])
+        'ID'                 => preg_replace('/\./', '', @$item['id'])
         ],
     ];
 
-    $sql_in = "INSERT INTO ".$ini["SERVER"]["TABLE"]."
-        (`name`, `surname`, `patronymic`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
-    VALUES ";
+    $all[] = $list[0];
 
     // Формируем огромный запрос!
-    foreach ($list as $key => $data) {
+    foreach ($list as $key => $data) 
+    {
         $sql_out .= 
         "(
             '{$data['name']}',
@@ -132,14 +127,17 @@ foreach($html_ul->find('li') as $li) {
     }
 
 }
+$sql_in = "INSERT INTO ".$ini["SERVER"]["TABLE"]."
+        (`name`, `surname`, `patronymic`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
+    VALUES ";
 
 // Заменяем последнюю в массиве "," на ";" и делаем запрос
 $sql_out = substr_replace($sql_out, ';', -1);
 $link->query($sql_in.$sql_out);
 
 // Для json вывода
-$result = json_encode($all);  
-file_put_contents('terrorist-base.json', $result); 
+$json = safe_json_encode($all, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT); 
+file_put_contents('terrorist-base.json', $json); 
 
 // Закрываем соединение
 mysqli_close($link);
