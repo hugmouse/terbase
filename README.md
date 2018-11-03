@@ -44,7 +44,23 @@ $ apt-get install hhvm
 |------|---------|------------|---------------|----------------|-------------|----------------|-------------------|---------|
 | TEXT | TEXT    | TEXT       | DATE          | TEXT           | TEXT        | TEXT           | TEXT              | INT(16) |
 ```
-
+##### Пример создания таблицы `'TABLENAME'` в базе с именем `'DB'` (InnoDB):
+```sql
+CREATE TABLE `DB`.`TABLENAME`
+ ( 
+ `name` TEXT NOT NULL ,
+ `surname` TEXT NOT NULL ,
+ `patronymic` TEXT NOT NULL ,
+ `date_of_birth` DATE NOT NULL ,
+ `place_of_birth` TEXT NOT NULL ,
+ `name_second` TEXT NOT NULL ,
+ `subname_second` TEXT NOT NULL ,
+ `patronymic_second` TEXT NOT NULL ,
+ `ID` INT NOT NULL
+ ) 
+ENGINE = InnoDB;
+```
+---
 ##### Если используете просто php-cli:
 ```sh
 $ git clone https://github.com/hugmouse/terbase.git
