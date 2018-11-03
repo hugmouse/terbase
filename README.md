@@ -9,7 +9,7 @@
 ## Способ с использованием PHP:
 ```sh
 $ apt-get update
-$ apt-get install php php-mysql
+$ apt-get install php php-mysql php-mbstring
 ```
 
 ## Для использования вместе с HHVM:
