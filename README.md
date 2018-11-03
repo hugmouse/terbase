@@ -1,7 +1,6 @@
 
 
-# RTBPA
-RTBPA = Russian Terrorist Base Parser Algorithm 
+# terbase
 Парсит список террористов, получаемый от "www.fedsfm.ru"
 
 # Установка необходимого ПО
