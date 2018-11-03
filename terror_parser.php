@@ -112,7 +112,7 @@ foreach($html_ul->find('li') as $li) {
     ];
 
     $sql_in = "INSERT INTO ".$ini["SERVER"]["TABLE"]."
-        (`name`, `surname`, `patronymic`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
+        (`name`, `surname`, `patronymic`, `date_of_birth`, `place_of_birth`, `name_second`, `surname_second`, `patronymic_second`, `ID`)
     VALUES ";
 
     // Формируем огромный запрос!
