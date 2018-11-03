@@ -61,18 +61,12 @@ CREATE TABLE `DB`.`TABLENAME`
 ENGINE = InnoDB;
 ```
 ---
-##### Если используете просто php-cli:
+##### Запуск скрипта:
 ```sh
 $ git clone https://github.com/hugmouse/terbase.git
 $ cd terbase
-$ php terror_parser.php
-```
-
-##### HHVM:
-```sh
-$ git clone https://github.com/hugmouse/terbase.git
-$ cd terbase
-$ hhvm terror_parser.php
+$ php terror_parser.php 
+# или 'hhvm terror_parser.php', если вы ставили 'hhvm' изначально
 ```
 
 После установки и вызова `terror_base.php` создается файл `terrorist-base.json` , содержащий все те же данные, что передаются в базу, однако в `.json`.
