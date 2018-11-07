@@ -40,17 +40,18 @@ $ apt-get install hhvm
 # Использование
 ### Перед использованием алгоритма стоит создать базу со следующими значениями:
 ```markdown
-| name | surname | patronymic | date_of_birth | place_of_birth | name_second | surname_second | patronymic_second | ID      |
-|------|---------|------------|---------------|----------------|-------------|----------------|-------------------|---------|
-| TEXT | TEXT    | TEXT       | DATE          | TEXT           | TEXT        | TEXT           | TEXT              | INT(16) |
+| name | surname | patronymic | tronim | date_of_birth | place_of_birth | name_second | surname_second | patronymic_second | ID      |
+|------|---------|------------|--------|---------------|----------------|-------------|----------------|-------------------|---------|
+| TEXT | TEXT    | TEXT       | TEXT   | DATE          | TEXT           | TEXT        | TEXT           | TEXT              | INT(16) |
 ```
-##### Пример создания таблицы `'TABLENAME'` в базе с именем `'DB'` (InnoDB):
+##### Пример создания таблицы `'TABLENAME'` в базе с именем `'DB'` (MySQL):
 ```sql
 CREATE TABLE `DB`.`TABLENAME`
  ( 
  `name` TEXT NOT NULL ,
  `surname` TEXT NOT NULL ,
  `patronymic` TEXT NOT NULL ,
+ `tronim` TEXT NOT NULL ,
  `date_of_birth` DATE NOT NULL ,
  `place_of_birth` TEXT NOT NULL ,
  `name_second` TEXT NOT NULL ,
