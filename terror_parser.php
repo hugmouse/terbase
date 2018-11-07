@@ -45,6 +45,7 @@ foreach($html_ul->find('li') as $li) {
     {
         if (preg_match_all("/(ОГЛЫ)|(УГЛИ)|(КЫЗЫ)|(УУЛУ)|(КИЗИ)/", $word[0][4], $word_clear, PREG_OFFSET_CAPTURE))
         {
+            $item['tronim'] = $word_clear[0][0][0];
             $item['date_of_birth'] = $word[0][5];
             // i=8 ибо с 8 позиции в массиве начинается место проживания, это из-за указателей пола на Тюрских языках
             $i=8;
@@ -56,7 +57,7 @@ foreach($html_ul->find('li') as $li) {
         }
         else
         {
-            unset($item['name_second'], $item['surname_second'], $item['patronymic_second'], $item['date_of_birth'], $item['place_of_birth']);
+            unset($item['name_second'], $item['surname_second'], $item['patronymic_second'], $item['date_of_birth'], $item['place_of_birth'], $item['tronim']);
             $item['date_of_birth'] = $word[0][4];
             // i=7 ибо с 7 позиции в массиве начинается место проживания, это в обычном случае ФИО.
             $i=7;
@@ -98,6 +99,7 @@ foreach($html_ul->find('li') as $li) {
         'name'               => trimmer(@$item['name']), 
         'surname'            => trimmer(@$item['surname']),
         'patronymic'         => trimmer(@$item['patronymic']),
+        'tronim'             => trimmer(@$item['tronim']),
         'date_of_birth'      => date("Y-m-d", strtotime(@$item['date_of_birth'])), // 31.12.2000 => 2000.12.31 (for MYSQL)
         'place_of_birth'     => trimmer(@$item['place_of_birth']),
         'name_second'        => trimmer(@$item['name_second']),
@@ -117,6 +119,7 @@ foreach($html_ul->find('li') as $li) {
             '{$data['name']}',
             '{$data['surname']}',
             '{$data['patronymic']}',
+            '{$data['tronim']}',
             '{$data['date_of_birth']}',
             '{$data['place_of_birth']}',
             '{$data['name_second']}',
@@ -127,13 +130,14 @@ foreach($html_ul->find('li') as $li) {
     }
 
 }
-$sql_in = "INSERT INTO ".$ini["SERVER"]["TABLE"]."
-        (`name`, `surname`, `patronymic`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
+$sql_in = "INSERT INTO ".'`'.$ini["SERVER"]["TABLE"].'`'."
+        (`name`, `surname`, `patronymic`, `tronim`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
     VALUES ";
 
 // Заменяем последнюю в массиве "," на ";" и делаем запрос
 $sql_out = substr_replace($sql_out, ';', -1);
 $link->query($sql_in.$sql_out);
+echo $link->error;
 
 // Для json вывода
 $json = safe_json_encode($all, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT); 
