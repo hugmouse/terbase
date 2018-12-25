@@ -1,4 +1,5 @@
 <?php
+
 header('Content-Type: text/html; charset=utf8');
 
 // Чтобы хост не подумол, что мы роботы
@@ -110,41 +111,45 @@ foreach($html_ul->find('li') as $li) {
     ];
 
     $all[] = $list[0];
+    $places[] = $list[0]['place_of_birth'];
 
-    // Формируем огромный запрос!
-    foreach ($list as $key => $data) 
-    {
-        $sql_out .= 
-        "(
-            '{$data['name']}',
-            '{$data['surname']}',
-            '{$data['patronymic']}',
-            '{$data['tronim']}',
-            '{$data['date_of_birth']}',
-            '{$data['place_of_birth']}',
-            '{$data['name_second']}',
-            '{$data['surname_second']}',
-            '{$data['patronymic_second']}',
-            '{$data['ID']}'
-        ),";
-    }
+        // Формируем огромный запрос!
+        foreach ($list as $key => $data) 
+        {
+            @$sql_out .= 
+            "(
+                '{$data['name']}',
+                '{$data['surname']}',
+                '{$data['patronymic']}',
+                '{$data['tronim']}',
+                '{$data['date_of_birth']}',
+                '{$data['place_of_birth']}',
+                '{$data['name_second']}',
+                '{$data['surname_second']}',
+                '{$data['patronymic_second']}',
+                '{$data['ID']}'
+            ),";
+        }
 
 }
-$sql_in = "INSERT INTO ".'`'.$ini["SERVER"]["TABLE"].'`'."
-        (`name`, `surname`, `patronymic`, `tronim`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
-    VALUES ";
 
-// Заменяем последнюю в массиве "," на ";" и делаем запрос
-$sql_out = substr_replace($sql_out, ';', -1);
-$link->query($sql_in.$sql_out);
-echo $link->error;
+if(($options["database"] || $options["d"]) != "none")
+{
+    $sql_in = "INSERT INTO ".'`'.$ini["SERVER"]["TABLE"].'`'."
+            (`name`, `surname`, `patronymic`, `tronim`, `date_of_birth`, `place_of_birth`, `name_second`, `subname_second`, `patronymic_second`, `ID`)
+        VALUES ";
 
+    // Заменяем последнюю в массиве "," на ";" и делаем запрос
+    $sql_out = substr_replace($sql_out, ';', -1);
+    $link->query($sql_in.$sql_out);
+    echo $link->error;
+
+    // Закрываем соединение
+    mysqli_close($link);
+}
 // Для json вывода
 $json = safe_json_encode($all, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT); 
 file_put_contents('terrorist-base.json', $json); 
-
-// Закрываем соединение
-mysqli_close($link);
 
 printf('Обработано %d строк за %f секунд. Все удачно! %c', $data['ID'], (microtime(true) - $time_start), 10);
 ?>

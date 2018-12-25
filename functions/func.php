@@ -40,6 +40,4 @@ function utf8ize($mixed)
 
     return $mixed;
 }    
-
 ?>
-a
